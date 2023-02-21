@@ -1,0 +1,485 @@
+{
+	"info": {
+		"_postman_id": "d199a3e6-09c7-493a-bf6e-3a7f699505f5",
+		"name": "REST API Usuario-Producto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Crear Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"correo\": \"{{correo}}\",\n    \"clave\": \"{{clave}}\",\n    \"claveConfirmada\": \"{{clave}}\",\n    \"nombre\": \"{{nombre}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/usuarios",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Sesion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"console.log(jsonData)",
+									"postman.setEnvironmentVariable(\"tokenAcceso\", jsonData.tokenAcceso);",
+									"postman.setEnvironmentVariable(\"tokenActualizado\", jsonData.tokenActualizado);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"correo\": \"{{correo}}\",\n    \"clave\": \"{{clave}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/sesiones",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"sesiones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Sesiones",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"const nuevoTokenAcceso = responseHeaders['x-access-token']",
+									"",
+									"if(nuevoTokenAcceso){",
+									"    console.log('Set new access token')",
+									"postman.setEnvironmentVariable(\"tokenAcceso\", nuevoTokenAcceso);",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenAcceso}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-refresh",
+								"value": "{{tokenActualizado}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/api/sesiones",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"sesiones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar Sesion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const nuevoTokenAcceso = responseHeaders['x-access-token']",
+									"",
+									"if(nuevoTokenAcceso){",
+									"    console.log('Set new access token')",
+									"postman.setEnvironmentVariable(\"tokenAcceso\", nuevoTokenAcceso);",
+									"}",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenAcceso}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-refresh",
+								"value": "{{tokenActualizado}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/api/sesiones",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"sesiones"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "Crear Producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"_id\", \"_id\");",
+									"const nuevoTokenAcceso = responseHeaders['x-access-token']",
+									"",
+									"if(nuevoTokenAcceso){",
+									"    console.log('Nuevo Token generado')",
+									"postman.setEnvironmentVariable(\"tokenAcceso\", nuevoTokenAcceso);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenAcceso}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-refresh",
+								"value": "{{tokenActualizado}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Canon EOS 1500D DSLR Camera with 18-55mm Lens\",\n    \"descripcion\": \"Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go.\",\n    \"precio\": 879.99,\n    \"image\": \"https://i.imgur.com/QlRphfQ.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/productos",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"productos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Productos",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Canon EOS 1500D DSLR Camera with 18-55mm Lens\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/productos/",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"productos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const nuevoTokenAcceso = responseHeaders['x-access-token']",
+									"",
+									"if(nuevoTokenAcceso){",
+									"    console.log('Set new access token')",
+									"postman.setEnvironmentVariable(\"tokenAcceso\", nuevoTokenAcceso);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenAcceso}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-refresh",
+								"value": "{{tokenActualizado}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"titulo\": \"Canon XXXXX\",\n    \"descripcion\": \"Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go.\",\n    \"precio\": 879.99,\n    \"image\": \"https://i.imgur.com/QlRphfQ.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/productos/",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"productos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar Producto",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const nuevoTokenAcceso = responseHeaders['x-access-token']",
+									"",
+									"if(nuevoTokenAcceso){",
+									"    console.log('Set new access token')",
+									"postman.setEnvironmentVariable(\"tokenAcceso\", nuevoTokenAcceso);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{tokenAcceso}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-refresh",
+								"value": "{{tokenActualizado}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/api/productos/{{productoId}}",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"api",
+								"productos",
+								"{{productoId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{tokenAcceso}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "tokenAcceso",
+			"value": "<accessToken will be set when you create a session>",
+			"disabled": true
+		},
+		{
+			"key": "tokenActualizado",
+			"value": "<refreshToken will be set when you create a session>",
+			"disabled": true
+		},
+		{
+			"key": "endpoint",
+			"value": "http://localhost:4001"
+		},
+		{
+			"key": "productoId",
+			"value": "<productoId will be set when you create a session>"
+		}
+	]
+}
