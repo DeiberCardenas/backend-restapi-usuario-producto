@@ -205,7 +205,7 @@
 							"script": {
 								"exec": [
 									"let jsonData = JSON.parse(responseBody);",
-									"postman.setEnvironmentVariable(\"_id\", \"_id\");",
+									"",
 									"const nuevoTokenAcceso = responseHeaders['x-access-token']",
 									"",
 									"if(nuevoTokenAcceso){",
@@ -288,7 +288,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"titulo\": \"Canon EOS 1500D DSLR Camera with 18-55mm Lens\"\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -348,7 +348,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"titulo\": \"Canon XXXXX\",\n    \"descripcion\": \"Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go.\",\n    \"precio\": 879.99,\n    \"image\": \"https://i.imgur.com/QlRphfQ.jpg\"\n}",
+							"raw": "{\n    \"titulo\": \"Canon sasasasasa\",\n    \"descripcion\": \"Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go.\",\n    \"precio\": 879.99,\n    \"image\": \"https://i.imgur.com/QlRphfQ.jpg\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -408,7 +408,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"titulo\": \"Canon EOS 1500D DSLR Camera with 18-55mm Lens\",\r\n    \"descripcion\": \"Designed for first-time DSLR owners who want impressive results straight out of the box, capture those magic moments no matter your level with the EOS 1500D. With easy to use automatic shooting modes, large 24.1 MP sensor, Canon Camera Connect app integration and built-in feature guide, EOS 1500D is always ready to go.\",\r\n    \"precio\": 879.99,\r\n    \"image\": \"https://i.imgur.com/QlRphfQ.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -416,14 +416,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/api/productos/{{productoId}}",
+							"raw": "{{endpoint}}/api/productos/",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"api",
 								"productos",
-								"{{productoId}}"
+								""
 							]
 						}
 					},
