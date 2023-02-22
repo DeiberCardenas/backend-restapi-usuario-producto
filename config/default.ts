@@ -1,9 +1,20 @@
+/* Este código es un módulo de Node.js que exporta un objeto con
+varias constantes y configuraciones para ser utilizado en la aplicación 
+Cada una de estas configuraciones será utilizada en diferentes partes
+de la aplicación para establecer conexiones, configurar algoritmos de seguridad
+y definir tiempos de vida de tokens de autenticación y acceso.*/
 export default {
-    port: 4001,
-    dbUri: "mongodb://localhost:27017/rest-api-usuario-producto", 
-    saltWorkFactor: 10,
-    accessTokenTtl: '15m', 
-    refreshTokenTtl: '1y',
+    port: 4001, // Define el número de puerto que se utilizará para ejecutar la aplicación.
+    dbUri: "mongodb://localhost:27017/rest-api-usuario-producto", /* Establece la dirección URI para conectarse
+    a la base de datos MongoDB. En este caso, se utiliza la base de datos "rest-api-usuario-producto"
+    alojada localmente en el puerto 27017.*/
+    saltWorkFactor: 10, /* Define el factor de trabajo para el algoritmo de hashing de contraseñas bcrypt.
+    Este valor determina el número de rondas que se utilizarán para calcular el hash de la contraseña.
+    Cuanto mayor sea el valor, más segura será la contraseña, pero también tomará más tiempo calcular el hash.*/
+    accessTokenTtl: '15m', /*Establece el tiempo de vida del token de acceso generado por la aplicación.
+    En este caso, el tiempo de vida es de 15 minutos.*/
+    refreshTokenTtl: '1y', /* Establece el tiempo de vida del token de actualización generado por la aplicación.
+    En este caso, el tiempo de vida es de 1 año. */
     publicKey: `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlLeG4T/9ZjaW4EK3nCFE
 ZqejwFAiHwtxj+F7W228QPNGEtQv14gXksVb3ok3+KkD2edHg2USWYn/YmX9NQtu
@@ -12,7 +23,9 @@ kUVs0FeJATA1ZZaWL+u2in/F/m5DQG0sZQRk0iw25v6SNiNHrKMUwZJAUQyRUYci
 OCKv1hGS6nTTsh+tMo4ps63KXtqgeaIH0qzZoJ6qNYBGdCcQMmq43I29QRxN1Crh
 I8w0GrrcxlplQHx77kCW5svUERkaDpj+fBGecOUhqN1GWMjkYyaic4g/r2tJphEw
 KQIDAQAB
------END PUBLIC KEY-----`,
+-----END PUBLIC KEY-----`, /*Contiene la clave pública utilizada
+ para validar los tokens de acceso generados por la aplicación.
+ RSA de 2048bit. RECUERDE CAMBIAR ESTA LLAVE SI VA DESPLEGAR LA APP*/
     privateKey:`-----BEGIN RSA PRIVATE KEY-----
 MIIEogIBAAKCAQEAlLeG4T/9ZjaW4EK3nCFEZqejwFAiHwtxj+F7W228QPNGEtQv
 14gXksVb3ok3+KkD2edHg2USWYn/YmX9NQtuVnYhiV8u9GrdvOhBbNiVn/qxrMxv
@@ -39,5 +52,7 @@ qTrCoODURY3lUNMcjL9SAyj/ucyOwBU0g5SkkHF1eL6JpQK6S7ubVZpDNbbWeXM0
 wZWVAoGAfmjEKAVPRRoMfQObS2204oLrKhXhsu4OL72c/1HQUnogo6dbWrJiEkvK
 ZH+kcBv3V53f493whjSmDSbhFHZiv6RQN5WxFqLUIQCeY6UYfvkpaieZyGsdbjaH
 6mBEaTr0OK7yTHCeKyA8SFb+vV3gqNkM0S80qHVXY5eyYBH3lGw=
------END RSA PRIVATE KEY-----`
+-----END RSA PRIVATE KEY-----` /*Contiene la clave privada utilizada
+para firmar los tokens de acceso generados por la aplicación. 
+RSA de 2048bit. RECUERDE CAMBIAR ESTA LLAVE SI VA DESPLEGAR LA APP*/
 }
